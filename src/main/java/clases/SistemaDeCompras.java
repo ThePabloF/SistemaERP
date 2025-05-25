@@ -23,10 +23,6 @@ public class SistemaDeCompras {
 
 
 
-        Direccion direccion1 = new Direccion("Principal1","Secundaria1","17-80","Cuenca","Ecuador","Azuay");
-        Direccion direccion2 = new Direccion("Principal2","Secundaria2","17-90","Cuenca","Ecuador","Azuay");
-        Direccion direccion3 = new Direccion("Principal3","Secundaria1","17-70","Cuenca","Ecuador","Azuay");
-
         Proveedor proveedor1 = new Proveedor(100,"LNS","0982717217","lns@gmail.com");
         Proveedor proveedor2 = new Proveedor(101,"ImpreShop","0981231231","impre@gmail.com");
         Proveedor proveedor3 = new Proveedor(102,"OfiShop","0931231127","oficinaShop@gmail.com");
