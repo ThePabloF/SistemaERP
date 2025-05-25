@@ -1,114 +1,93 @@
 package clases.visual;
-import clases.SistemaDeCompras;
 
-import javax.swing.*;
+import clases.SistemaDeCompras;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MenuPrincipal extends JFrame {
+public class MenuPrincipal extends Frame {
     private SistemaDeCompras sistema;
 
     public MenuPrincipal(SistemaDeCompras sistema) {
         this.sistema = sistema;
+        mostrar();
     }
-    public MenuPrincipal() {
 
-    }
+    public MenuPrincipal() {}
 
     public void mostrar() {
         setTitle("MENÚ PRINCIPAL");
         setSize(600, 500);
         setLocationRelativeTo(null);
-
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(new Color(169, 176, 185)); // gris azulado
-        add(mainPanel);
+        setLayout(new BorderLayout());
+        setBackground(new Color(169, 176, 185)); // gris azulado
 
         // Encabezado
-        JPanel arriba = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        Panel arriba = new Panel(new FlowLayout(FlowLayout.LEFT));
         arriba.setBackground(new Color(173, 216, 230)); // celeste claro
-//        JLabel logo = new JLabel(new ImageIcon("ruta/del/logo.png")); // logo
-        JLabel titulo = new JLabel("MENÚ PRINCIPAL");
+        Label titulo = new Label("MENÚ PRINCIPAL");
         titulo.setFont(new Font("Arial", Font.BOLD, 26));
-//        header.add(logo);
         arriba.add(titulo);
-        mainPanel.add(arriba, BorderLayout.NORTH);
+        add(arriba, BorderLayout.NORTH);
 
         // Centro
+        Panel centro = new Panel(new FlowLayout(FlowLayout.CENTER, 20, 30));
+        Panel botones = new Panel(new FlowLayout(FlowLayout.LEFT));
 
-
-
-
-
-        JPanel botones = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        setBackground(null);
-        Panel centro = new Panel(new FlowLayout(FlowLayout.CENTER,20,30));
-
-        JButton btnProveedores =new JButton("Proveedor");
+        Button btnProveedores = new Button("Proveedor");
         btnProveedores.setPreferredSize(new Dimension(160, 160));
         btnProveedores.setFont(new Font("Arial", Font.BOLD, 18));
         btnProveedores.setBackground(new Color(0, 153, 204));
         btnProveedores.setForeground(Color.WHITE);
-        btnProveedores.setHorizontalTextPosition(SwingConstants.CENTER);
-        btnProveedores.setVerticalTextPosition(SwingConstants.BOTTOM);
 
-        JButton btnProductos = new JButton("Productos");
+        Button btnProductos = new Button("Productos");
         btnProductos.setPreferredSize(new Dimension(160, 160));
         btnProductos.setFont(new Font("Arial", Font.BOLD, 18));
         btnProductos.setBackground(new Color(0, 153, 204));
         btnProductos.setForeground(Color.WHITE);
-        btnProductos.setHorizontalTextPosition(SwingConstants.CENTER);
-        btnProductos.setVerticalTextPosition(SwingConstants.BOTTOM);
 
-        JButton btnSolicitud = new JButton("Solicitudes");
+        Button btnSolicitud = new Button("Solicitudes");
         btnSolicitud.setPreferredSize(new Dimension(160, 160));
         btnSolicitud.setFont(new Font("Arial", Font.BOLD, 18));
         btnSolicitud.setBackground(new Color(0, 153, 204));
         btnSolicitud.setForeground(Color.WHITE);
-        btnSolicitud.setHorizontalTextPosition(SwingConstants.CENTER);
-        btnSolicitud.setVerticalTextPosition(SwingConstants.BOTTOM);
-
 
         botones.add(btnProveedores);
         botones.add(btnProductos);
         botones.add(btnSolicitud);
-
         centro.add(botones);
-        mainPanel.add(centro, BorderLayout.CENTER);
+        add(centro, BorderLayout.CENTER);
 
-        // Derecha
-        Panel derecha = new Panel(new FlowLayout(FlowLayout.LEFT));
-        derecha.setBackground(new Color(169, 176, 185));
+        // Pie (Sur)
+        Panel abajo = new Panel(new FlowLayout(FlowLayout.LEFT));
+        abajo.setBackground(new Color(169, 176, 185));
         Button btnSalir = new Button("Salir");
-        btnSalir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        derecha.add(btnSalir);
-        mainPanel.add(derecha, BorderLayout.SOUTH);
+        btnSalir.addActionListener(e -> System.exit(0));
+        abajo.add(btnSalir);
+        add(abajo, BorderLayout.SOUTH);
 
-        btnProveedores.addActionListener(e -> {setVisible(false);
-            new MenuProveedores(sistema).mostrar();
+        // Acciones
+        btnProveedores.addActionListener(e -> {
+            setVisible(false);
+            new MenuProveedores(sistema);
         });
 
-//        btnProductos.addActionListener(e -> {setVisible(false);
-//            new MenuProductos().mostrar();
-//        });
-
-       
-//
-//        btnSolicitud.addActionListener(e -> {setVisible(false);
-//            new MenuSolicitudes().mostrar();});
         btnProductos.addActionListener(e -> {
             setVisible(false);
             new MenuProductos(sistema).setVisible(true);
         });
 
+//        btnSolicitud.addActionListener(e -> {
+//            setVisible(false);
+//            new MenuSolicitudes(sistema).mostrar();
+//        });
+
+        // Acción de cerrar ventana
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
 
         setVisible(true);
-
-
-
     }
 }

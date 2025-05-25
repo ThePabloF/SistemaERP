@@ -9,8 +9,8 @@ import java.util.List;
 public class Proveedor extends Usuario {
     private List<Producto> productos;
 
-    public Proveedor(int id, String nombre, String apellido, String telefono) {
-        super(id, nombre, apellido, telefono);
+    public Proveedor(int id, String nombre, String telefono, String correo) {
+        super(id, nombre, correo, telefono);
         this.productos = new ArrayList<>();
 
     }
