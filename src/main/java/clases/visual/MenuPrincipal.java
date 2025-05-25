@@ -95,9 +95,15 @@ public class MenuPrincipal extends JFrame {
 //        btnProductos.addActionListener(e -> {setVisible(false);
 //            new MenuProductos().mostrar();
 //        });
+
+       
 //
 //        btnSolicitud.addActionListener(e -> {setVisible(false);
 //            new MenuSolicitudes().mostrar();});
+        btnProductos.addActionListener(e -> {
+            setVisible(false);
+            new MenuProductos(sistema).setVisible(true);
+        });
 
 
         setVisible(true);

@@ -53,7 +53,7 @@ public class MenuProveedores extends JFrame {
 
         btnVolver.addActionListener(e -> {
            dispose();
-            new MenuPrincipal().mostrar();
+            new MenuPrincipal(sistema).mostrar();
         });
 
         // GUARDANDO

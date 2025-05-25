@@ -19,7 +19,12 @@ public class SistemaDeCompras {
     List<DetalleSolicitud> listaDetalleSolicitud = new ArrayList();
     List<SolicitudCompra> listaSolicitudesCompra = new ArrayList();
     List<Producto> listaProductos = new ArrayList();
+
+    public List<Producto> getListaProductos() {
+        return this.listaProductos;
+    }
     public SistemaDeCompras() {
+
 
 
 
