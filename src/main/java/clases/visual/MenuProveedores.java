@@ -1,45 +1,44 @@
 package clases.visual;
 
-
 import clases.SistemaDeCompras;
 
-import javax.print.attribute.standard.PrinterName;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
 public class MenuProveedores extends Frame {
     private SistemaDeCompras sistema;
-
     private int idProveedores = 103;
 
     private Panel panelForm;
-    private Panel contenido;
-    private Panel panelBuscar;
     private TextField nombre;
     private TextField telefono;
     private TextField correo;
     private TextField buscar;
     private Button btnBuscar;
+    private TextArea areaProveedores;
+
     public MenuProveedores(SistemaDeCompras sistema) {
         this.sistema = sistema;
         mostrar();
     }
+
     public void mostrar() {
         setTitle("PROVEEDORES");
-        setSize(600, 500);
+        setSize(600, 550);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         setBackground(new Color(169, 176, 185));
 
-        //Panel NORTE
-        panelForm = new Panel(new GridLayout(3, 2, 5, 5));
+        // Panel de formulario
+        panelForm = new Panel(new GridLayout(4, 2, 5, 5));
         panelForm.setBackground(new Color(169, 176, 185));
 
         nombre = new TextField(10);
         telefono = new TextField(10);
         correo = new TextField(10);
+        buscar = new TextField(10);
+        btnBuscar = new Button("Buscar");
 
         panelForm.add(new Label("Nombre:"));
         panelForm.add(nombre);
@@ -47,87 +46,81 @@ public class MenuProveedores extends Frame {
         panelForm.add(telefono);
         panelForm.add(new Label("Correo:"));
         panelForm.add(correo);
-        // Área de texto para mostrar proveedoresa
-        TextArea areaProveedores = new TextArea(10, 40);
-        TextArea areaProveedoresB = new TextArea(10, 40);
-        llenarAreaProveedores(areaProveedores);
-        llenarAreaProveedores(areaProveedoresB);
+        panelForm.add(new Label("Buscar por ID:"));
+        panelForm.add(buscar);
 
+        // Área de texto
+        areaProveedores = new TextArea(10, 40);
         areaProveedores.setEditable(false);
 
-        // Panel de CENTRO
-        contenido = new Panel(new GridLayout(1,2));
+        // Panel de botones
+        Panel panelBotones = new Panel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         Button btnGuardar = new Button("Guardar");
-        Panel centroDerecha = new Panel(new FlowLayout(FlowLayout.CENTER));
-        centroDerecha.setBackground(Color.ORANGE);
-        Panel centroIzquierda = new Panel(new FlowLayout(FlowLayout.CENTER));
-        centroIzquierda.setBackground(Color.GREEN);
-        centroDerecha.add(btnGuardar);
-        centroIzquierda.add(areaProveedores);
-        contenido.add(centroIzquierda, BorderLayout.WEST);
-        contenido.add(centroDerecha, BorderLayout.EAST);
-
-
-
-
-        // Panel de SUR
-        panelBuscar = new Panel(new GridLayout(1,2));
-        Panel buscarIzquierda = new Panel(new FlowLayout(FlowLayout.CENTER));
-        Panel buscarDerecha = new Panel(new FlowLayout(FlowLayout.CENTER));
-
         Button btnVolver = new Button("Volver al Menú");
-        btnBuscar = new Button("Buscar");
-        buscar = new TextField(10);
 
-        buscarIzquierda.add(btnBuscar);
-        buscarIzquierda.add(buscar);
-        buscarIzquierda.add(areaProveedoresB);
+        panelBotones.add(btnBuscar);
+        panelBotones.add(btnGuardar);
+        panelBotones.add(btnVolver);
 
-        buscarDerecha.add(btnVolver);
-        panelBuscar.add(buscarIzquierda);
-        panelBuscar.add(buscarDerecha);
-
-        // Acciones de Botones
-        btnVolver.addActionListener(e -> {
-            dispose();
-            new MenuPrincipal(sistema).mostrar();
+        // Acción Buscar
+        btnBuscar.addActionListener(e -> {
+            try {
+                int idBuscado = Integer.parseInt(buscar.getText());
+                List<Proveedor> lista = sistema.getListaProveedores();
+                Proveedor encontrado = null;
+                for (Proveedor p : lista) {
+                    if (p.getId() == idBuscado) {
+                        encontrado = p;
+                        break;
+                    }
+                }
+                if (encontrado != null) {
+                    areaProveedores.setText("Proveedor encontrado:\n" + encontrado.toString());
+                } else {
+                    areaProveedores.setText("Proveedor con ID " + idBuscado + " no encontrado.");
+                }
+            } catch (NumberFormatException ex) {
+                areaProveedores.setText("Error: ID debe ser un número entero.");
+            }
         });
 
-
+        // Acción Guardar
         btnGuardar.addActionListener(e -> {
             Proveedor proveedor = new Proveedor(idProveedores++, nombre.getText(), telefono.getText(), correo.getText());
             sistema.agregarProveedores(proveedor);
-
-            List<Proveedor> lista = sistema.getListaProveedores();
-
-            areaProveedores.setText(""); // Limpiar área antes
-            areaProveedoresB.setText("");
-            for (Proveedor p : lista) {
-                areaProveedores.append(p.toString() + "\n");
-                areaProveedoresB.append(p.toString() + "\n");
-            }
-
-            // Limpiar campos
+            actualizarListaProveedores();
             nombre.setText("");
             telefono.setText("");
             correo.setText("");
         });
 
+        // Acción Volver
+        btnVolver.addActionListener(e -> {
+            dispose();
+            new MenuPrincipal(sistema).mostrar();
+        });
 
+        // Agregamos al Frame
         add(panelForm, BorderLayout.NORTH);
-        add(contenido, BorderLayout.CENTER);
-        add(panelBuscar, BorderLayout.SOUTH);
+        add(areaProveedores, BorderLayout.CENTER);
+        add(panelBotones, BorderLayout.SOUTH);
+
+        actualizarListaProveedores();
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                dispose();
+                new MenuPrincipal(sistema).mostrar();
+            }
+        });
 
         setVisible(true);
     }
 
-    private void llenarAreaProveedores(TextArea area) {
-        area.setText(""); // Limpia antes de escribir
-        List<Proveedor> lista = sistema.getListaProveedores();
-        for (Proveedor p : lista) {
-            area.append(p.toString() + "\n");
+    private void actualizarListaProveedores() {
+        areaProveedores.setText("");
+        for (Proveedor p : sistema.getListaProveedores()) {
+            areaProveedores.append(p.toString() + "\n");
         }
     }
-
-
 }
