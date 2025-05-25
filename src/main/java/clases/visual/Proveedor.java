@@ -1,6 +1,7 @@
 package clases.visual;
 
 import clases.Usuario;
+import clases.productos.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +12,20 @@ public class Proveedor extends Usuario {
     public Proveedor(int id, String nombre, String apellido, String telefono) {
         super(id, nombre, apellido, telefono);
         this.productos = new ArrayList<>();
+
     }
 
+    // Método para agregar productos
     public void agregarProducto(Producto producto) {
-        productos.add(producto);
+        this.productos.add(producto);
     }
 
-    public List<Producto> getProductos() { return productos; }
+    // Getter para la lista de productos
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+
 
     @Override
     public String toString() {
