@@ -1,6 +1,7 @@
 package clases.solicitudes;
 
 import clases.enums.EstadoSolicitud;
+import clases.usuarios.Solicitante;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -23,6 +24,10 @@ public class SolicitudCompra {
 
     public void agregarDetalle(DetalleSolicitud detalle) {
         detallesSolicitud.add(detalle);
+    }
+
+    public void agregarlistadetalles(List<DetalleSolicitud> detalle) {
+        detallesSolicitud.addAll(detalle);
     }
 
     // Metodo para calcular el costo total de la solicitud
@@ -79,5 +84,23 @@ public class SolicitudCompra {
 
     public void setFechaSolicitud(GregorianCalendar fechaSolicitud) {
         this.fechaSolicitud = fechaSolicitud;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SolicitudCompra N° ").append(numSolicitud).append("\n");
+        sb.append("Fecha: ").append(fechaSolicitud.getTime()).append("\n");
+        sb.append("Estado: ").append(estadoSolicitud).append("\n");
+        sb.append("Solicitante: ").append(solicitante).append("\n");
+        sb.append("Detalles:\n");
+
+        for (DetalleSolicitud d : detallesSolicitud) {
+            sb.append(" - ").append(d).append("\n");
+        }
+
+        sb.append("Total: $").append(calcularCostoTotal());
+
+        return sb.toString();
     }
 }

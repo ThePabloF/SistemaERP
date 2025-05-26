@@ -76,6 +76,11 @@ public class MenuPrincipal extends Frame {
             new MenuProductos(sistema).setVisible(true);
         });
 
+        btnSolicitud.addActionListener(e -> {
+           setVisible(false);
+           new MenuSolicitudes(sistema);
+        });
+
 //        btnSolicitud.addActionListener(e -> {
 //            setVisible(false);
 //            new MenuSolicitudes(sistema).mostrar();
