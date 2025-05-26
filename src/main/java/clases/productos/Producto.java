@@ -48,7 +48,7 @@ public abstract class Producto {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(double precioUnitario) {
+    public void sePrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 

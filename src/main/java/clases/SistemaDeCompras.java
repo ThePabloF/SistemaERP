@@ -6,8 +6,8 @@ import clases.enums.EstadoSolicitud;
 import clases.productos.Producto;
 import clases.productos.ProductoNoIva;
 import clases.solicitudes.DetalleSolicitud;
-import clases.solicitudes.Solicitante;
 import clases.solicitudes.SolicitudCompra;
+import clases.usuarios.Solicitante;
 import clases.visual.Proveedor;
 
 import java.util.ArrayList;
@@ -58,14 +58,14 @@ public class SistemaDeCompras {
 
         GregorianCalendar fechaActual = new GregorianCalendar();
 
-        Solicitante solicitante1 = new Solicitante("Juan","0982717217","Sistemas","juan@mail.com");
-        Solicitante solicitante2 = new Solicitante("Paul","0982717217","Administrativo","paul@mail.com");
-        Solicitante solicitante3 = new Solicitante("Diego","0982790380","Medico","diego@mail.com");
+        Solicitante solicitante1 = new Solicitante(300,"Juan","0982717217","juan@mail.com");
+        Solicitante solicitante2 = new Solicitante(301,"Paul","0982717217","paul@mail.com");
+        Solicitante solicitante3 = new Solicitante(302, "Diego","0982790380","diego@mail.com");
 
 
-        SolicitudCompra solicitudCompra1 = new SolicitudCompra(200,solicitante1,fechaActual);
-        SolicitudCompra solicitudCompra2 = new SolicitudCompra(201,solicitante2,fechaActual);
-        SolicitudCompra solicitudCompra3 = new SolicitudCompra(202,solicitante3,fechaActual);
+        SolicitudCompra solicitudCompra1 = new SolicitudCompra(400,solicitante1,fechaActual);
+        SolicitudCompra solicitudCompra2 = new SolicitudCompra(401,solicitante2,fechaActual);
+        SolicitudCompra solicitudCompra3 = new SolicitudCompra(402,solicitante3,fechaActual);
 
         solicitudCompra1.setEstadoSolicitud(EstadoSolicitud.SOLICITADA);
         solicitudCompra2.setEstadoSolicitud(EstadoSolicitud.SOLICITADA);
