@@ -65,7 +65,7 @@ public abstract class Producto {
         return "Producto{" +
                 "id=" + id +
                 ", nombreProducto='" + nombreProducto + '\'' +
-                ", precioUnitario=" + precioUnitario +
+                ", precioUnitario=" + calcularPrecio() +
                 ", categoria=" + categoria +
                 ", proveedor=" + proveedor.getNombre() +
                 '}';

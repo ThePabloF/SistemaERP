@@ -20,8 +20,6 @@ public class ProductoIva extends Producto {
 
     @Override
     public String toString() {
-        return  "ProductoIva{" +
-                "porcentajeIva=" + porcentajeIva +
-                '}';
+        return super.toString() + " (con IVA del " + porcentajeIva + "%)";
     }
 }
