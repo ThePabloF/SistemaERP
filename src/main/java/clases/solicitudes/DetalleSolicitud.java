@@ -17,7 +17,8 @@ public class DetalleSolicitud {
     // Metodo para calcular el subtotal del detalle (cantidad × precio del producto)
     public double calcularSubtotal() {
         if (producto != null) {
-            return cantidad * producto.getPrecioUnitario();
+
+            return cantidad * producto.calcularPrecio();
         }
         return 0.0;
     }
