@@ -99,6 +99,9 @@ Este proyecto es un sistema integral de gestión de compras diseñado para empre
   - *Enums:* Para definir categorías, estados y departamentos, mejorando la legibilidad y control de valores.
 
 ---
+## Video Explicativo del programa
+https://youtu.be/vhrHu_zfygg
+
 
 ## Ejemplos de Código (Resumen conceptual)
 
