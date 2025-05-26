@@ -33,7 +33,6 @@ public class SistemaDeCompras {
         listaProveedores.add(proveedor1);
         listaProveedores.add(proveedor2);
         listaProveedores.add(proveedor3);
-//
         Producto producto1 = new ProductoNoIva(100,"Grapadora",7.50, CategoriaProducto.OFICINA,proveedor1);
         Producto producto2 = new ProductoNoIva(101,"Impresora",170.50,CategoriaProducto.HARDWARE,proveedor2);
         Producto producto3 = new ProductoNoIva(102,"Escoba",4,CategoriaProducto.LIMPIEZA,proveedor3);
@@ -73,9 +72,6 @@ public class SistemaDeCompras {
         listaSolicitudesCompra.add(solicitudCompra2);
         listaSolicitudesCompra.add(solicitudCompra3);
 
-//        Ejecutable ejecutable = new Ejecutable(listaProveedores, listaProductos,listaDetalleSolicitud,listaSolicitudesCompra);
-//
-//        ejecutable.menuPrincipal();
     }
     public void agregarProveedores(clases.visual.Proveedor proveedor) {
         listaProveedores.add(proveedor);

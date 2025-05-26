@@ -15,12 +15,10 @@ public class Proveedor extends Usuario {
 
     }
 
-    // Método para agregar productos
     public void agregarProducto(Producto producto) {
         this.productos.add(producto);
     }
 
-    // Getter para la lista de productos
     public List<Producto> getProductos() {
         return productos;
     }

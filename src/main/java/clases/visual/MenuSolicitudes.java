@@ -41,13 +41,12 @@ public class MenuSolicitudes extends Frame {
         TextField correo = new TextField(10);
         TextField buscar = new TextField(10);
 
-        // ComboBox de departamentos (enum)
+        // ComboBox de departamentos y producto
         Choice comboDepartamento = new Choice();
         for (Departamento dep : Departamento.values()) {
             comboDepartamento.add(dep.name());
         }
 
-        // Campos detalle
         Choice comboProducto = new Choice();
         List<Producto> productos = sistema.getListaProductos();
         for (Producto p : productos) {
@@ -57,7 +56,6 @@ public class MenuSolicitudes extends Frame {
         TextField cantidad = new TextField(5);
         TextField justificacion = new TextField(20);
 
-        // Agregar campos al panel
         panelForm.add(new Label("Nombre Solicitante:"));
         panelForm.add(nombre);
         panelForm.add(new Label("Teléfono:"));
@@ -73,7 +71,6 @@ public class MenuSolicitudes extends Frame {
         panelForm.add(new Label("Justificación:"));
         panelForm.add(justificacion);
 
-        // Área de texto
         areaSolicitudes = new TextArea(10, 50);
         areaSolicitudes.setEditable(false);
 
@@ -95,12 +92,10 @@ public class MenuSolicitudes extends Frame {
         panelBotones.add(btnVolver);
         panelBotones.add(btnCambiarEstado);
 
-        // Organización
         add(panelForm, BorderLayout.NORTH);
         add(areaSolicitudes, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
 
-        // Acción guardar
         btnGuardar.addActionListener(e -> {
             if (litDetalles.isEmpty()) {
                 areaSolicitudes.setText("No se puede guardar la solicitud sin al menos un producto.");
@@ -120,14 +115,13 @@ public class MenuSolicitudes extends Frame {
 
             listaSolicitudes.add(solicitudCompra);
 
-            // Mostrar todas las solicitudes en el TextArea
             StringBuilder sb = new StringBuilder();
             for (SolicitudCompra s : listaSolicitudes) {
                 sb.append(s.toString()).append("\n\n");
             }
             areaSolicitudes.setText(sb.toString());
 
-            // Limpiar para nueva solicitud
+
             litDetalles.clear();
             nombre.setText("");
             telefono.setText("");
@@ -157,13 +151,11 @@ public class MenuSolicitudes extends Frame {
             }
         });
 
-        // Acción volver
         btnVolver.addActionListener(e -> {
             dispose();
             new MenuPrincipal(sistema).mostrar();
         });
 
-        // Acción buscar
         btnBuscar.addActionListener(e -> {
             try {
                 int idBuscado = Integer.parseInt(buscar.getText().trim());
@@ -193,7 +185,6 @@ public class MenuSolicitudes extends Frame {
             }
         });
 
-        // Acción cambiar estado
         btnCambiarEstado.addActionListener(e -> {
             if (solicitudEncontrada != null) {
                 solicitudEncontrada.cambiarEstadoSolicitud(EstadoSolicitud.APROBADO);

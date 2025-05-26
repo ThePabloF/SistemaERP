@@ -7,7 +7,7 @@ public abstract class Producto {
     private int id;
     private String nombreProducto;
     private double precioUnitario;
-    private CategoriaProducto categoria; // Puedes definir esta clase o enum aparte
+    private CategoriaProducto categoria;
     private Proveedor proveedor; // Asociación: cada producto tiene un proveedor
 
 

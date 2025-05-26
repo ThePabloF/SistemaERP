@@ -30,22 +30,19 @@ public class SolicitudCompra {
         detallesSolicitud.addAll(detalle);
     }
 
-    // Metodo para calcular el costo total de la solicitud
 
     public double calcularCostoTotal() {
         double total = 0;
         for (DetalleSolicitud d : detallesSolicitud) {
-            total += d.calcularSubtotal();
+            total += d.calcularCosto();
         }
         return total;
     }
 
-    // Metodo para cambiar el estado de la solicitud
     public void cambiarEstadoSolicitud(EstadoSolicitud nuevoEstado) {
         this.estadoSolicitud = nuevoEstado;
     }
 
-    //Getters y Setters
     public int getNumSolicitud() {
         return numSolicitud;
     }

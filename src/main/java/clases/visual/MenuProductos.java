@@ -29,11 +29,9 @@ public class MenuProductos extends Frame {
     }
 
     private void setupUI() {
-        // Panel de formulario
         Panel panelForm = new Panel(new GridLayout(8, 2, 5, 5)); // Se aumentó la fila
         panelForm.setBackground(new Color(169, 176, 185));
 
-        // Campos del formulario
         Label lblNombre = new Label("Nombre:");
         TextField nombre = new TextField(10);
         Label lblPrecio = new Label("Precio:");
@@ -60,12 +58,12 @@ public class MenuProductos extends Frame {
         }
 
 
-        // Nuevo campo de búsqueda
+
         Label lblBuscar = new Label("Buscar por ID:");
         TextField buscarId = new TextField(10);
         Button btnBuscar = new Button("Buscar");
 
-        // Acción de búsqueda
+        // BUSCAR
         btnBuscar.addActionListener(e -> {
             try {
                 int idBuscado = Integer.parseInt(buscarId.getText());
@@ -86,7 +84,7 @@ public class MenuProductos extends Frame {
             }
         });
 
-        // Agregar campos al panel
+        // Agregar objetos al panel del formulario
         panelForm.add(lblNombre);
         panelForm.add(nombre);
         panelForm.add(lblPrecio);
@@ -109,7 +107,6 @@ public class MenuProductos extends Frame {
         Button btnGuardar = new Button("Guardar");
         Button btnVolver = new Button("Volver al Menú");
 
-        // Acción para guardar producto
         btnGuardar.addActionListener(e -> {
             try {
                 String nom = nombre.getText();
@@ -117,7 +114,6 @@ public class MenuProductos extends Frame {
                 CategoriaProducto cat = CategoriaProducto.valueOf(comboCat.getSelectedItem());
                 Proveedor prov = proveedores.get(comboProv.getSelectedIndex());
 
-                // Validación primitiva para evitar duplicados
                 for (Producto p : sistema.getListaProductos()) {
                     if (p.getNombreProducto().equalsIgnoreCase(nom) &&
                             p.getPrecioUnitario() == prec &&

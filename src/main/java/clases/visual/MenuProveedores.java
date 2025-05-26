@@ -32,7 +32,6 @@ public class MenuProveedores extends Frame {
         setLayout(new BorderLayout());
         setBackground(new Color(169, 176, 185));
 
-        // Panel de formulario
         panelForm = new Panel(new GridLayout(4, 2, 5, 5));
         panelForm.setBackground(new Color(169, 176, 185));
 
@@ -55,7 +54,6 @@ public class MenuProveedores extends Frame {
         areaProveedores = new TextArea(10, 40);
         areaProveedores.setEditable(false);
 
-        // Panel de botones
         Panel panelBotones = new Panel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         Button btnGuardar = new Button("Guardar");
         Button btnVolver = new Button("Volver al Menú");
@@ -64,7 +62,6 @@ public class MenuProveedores extends Frame {
         panelBotones.add(btnGuardar);
         panelBotones.add(btnVolver);
 
-        // Acción Buscar
         btnBuscar.addActionListener(e -> {
             try {
                 int idBuscado = Integer.parseInt(buscar.getText());
@@ -86,7 +83,6 @@ public class MenuProveedores extends Frame {
             }
         });
 
-        // Acción Guardar
         btnGuardar.addActionListener(e -> {
             Proveedor proveedor = new Proveedor(idProveedores++, nombre.getText(), telefono.getText(), correo.getText());
             sistema.agregarProveedores(proveedor);
@@ -96,13 +92,11 @@ public class MenuProveedores extends Frame {
             correo.setText("");
         });
 
-        // Acción Volver
         btnVolver.addActionListener(e -> {
             dispose();
             new MenuPrincipal(sistema).mostrar();
         });
 
-        // Agregamos al Frame
         add(panelForm, BorderLayout.NORTH);
         add(areaProveedores, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);

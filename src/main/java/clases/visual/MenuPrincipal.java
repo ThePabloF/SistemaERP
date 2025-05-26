@@ -21,7 +21,6 @@ public class MenuPrincipal extends Frame {
         setLayout(new BorderLayout());
         setBackground(new Color(169, 176, 185)); // gris azulado
 
-        // Encabezado
         Panel arriba = new Panel(new FlowLayout(FlowLayout.LEFT));
         arriba.setBackground(new Color(173, 216, 230)); // celeste claro
         Label titulo = new Label("MENÚ PRINCIPAL");
@@ -29,7 +28,6 @@ public class MenuPrincipal extends Frame {
         arriba.add(titulo);
         add(arriba, BorderLayout.NORTH);
 
-        // Centro
         Panel centro = new Panel(new FlowLayout(FlowLayout.CENTER, 20, 30));
         Panel botones = new Panel(new FlowLayout(FlowLayout.LEFT));
 
@@ -57,7 +55,6 @@ public class MenuPrincipal extends Frame {
         centro.add(botones);
         add(centro, BorderLayout.CENTER);
 
-        // Pie (Sur)
         Panel abajo = new Panel(new FlowLayout(FlowLayout.LEFT));
         abajo.setBackground(new Color(169, 176, 185));
         Button btnSalir = new Button("Salir");
@@ -65,7 +62,6 @@ public class MenuPrincipal extends Frame {
         abajo.add(btnSalir);
         add(abajo, BorderLayout.SOUTH);
 
-        // Acciones
         btnProveedores.addActionListener(e -> {
             setVisible(false);
             new MenuProveedores(sistema);
@@ -81,12 +77,6 @@ public class MenuPrincipal extends Frame {
            new MenuSolicitudes(sistema);
         });
 
-//        btnSolicitud.addActionListener(e -> {
-//            setVisible(false);
-//            new MenuSolicitudes(sistema).mostrar();
-//        });
-
-        // Acción de cerrar ventana
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);

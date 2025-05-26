@@ -1,27 +1,29 @@
 package clases.solicitudes;
 
+import clases.Calculable;
 import clases.productos.Producto;
 
-public class DetalleSolicitud {
-    private Producto producto;
-    private int cantidad;
-    private String justificacion;
-
-    // Constructor
-    public DetalleSolicitud(Producto producto, int cantidad, String justificacion) {
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.justificacion = justificacion;
-    }
-
-    // Metodo para calcular el subtotal del detalle (cantidad × precio del producto)
-    public double calcularSubtotal() {
+public class DetalleSolicitud implements Calculable {
+    @Override
+    public double calcularCosto() {
         if (producto != null) {
 
             return cantidad * producto.calcularPrecio();
         }
         return 0.0;
     }
+
+    private Producto producto;
+    private int cantidad;
+    private String justificacion;
+
+    public DetalleSolicitud(Producto producto, int cantidad, String justificacion) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.justificacion = justificacion;
+    }
+
+
 
     public Producto getProducto() {
         return producto;
