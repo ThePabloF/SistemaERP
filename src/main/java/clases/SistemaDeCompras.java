@@ -26,12 +26,6 @@ public class SistemaDeCompras {
     public SistemaDeCompras() {
 
 
-
-
-        Direccion direccion1 = new Direccion("Principal1","Secundaria1","17-80","Cuenca","Ecuador","Azuay");
-        Direccion direccion2 = new Direccion("Principal2","Secundaria2","17-90","Cuenca","Ecuador","Azuay");
-        Direccion direccion3 = new Direccion("Principal3","Secundaria1","17-70","Cuenca","Ecuador","Azuay");
-
         Proveedor proveedor1 = new Proveedor(100,"LNS","0982717217","lns@gmail.com");
         Proveedor proveedor2 = new Proveedor(101,"ImpreShop","0981231231","impre@gmail.com");
         Proveedor proveedor3 = new Proveedor(102,"OfiShop","0931231127","oficinaShop@gmail.com");
@@ -91,29 +85,4 @@ public class SistemaDeCompras {
         return listaProveedores;
     }
 
-//        GestorProveedores gestorProveedores = new GestorProveedores();
-//        GestorProductos gestorProductos = new GestorProductos();
-//        GestorSolicitudes gestorSolicitud = new GestorSolicitudes();
-//
-//
-//        // Crear PROVEEDORES
-//        Proveedor proveedor1 = new Proveedor(100,"LNS","0982717217","lns@gmail.com");
-//        Proveedor proveedor2 = new Proveedor(101,"ImpreShop","0981231231","impre@gmail.com");
-//        Proveedor proveedor3 = new Proveedor(102,"OfiShop","0931231127","oficinaShop@gmail.com");
-//
-//        gestorProveedores.agregar(proveedor1);
-//        gestorProveedores.agregar(proveedor2);
-//        gestorProveedores.agregar(proveedor3);
-//
-//        // Crear PRODUCTOS
-//
-//        Producto producto1 = new Producto(1, "Mouse", 15.5,CategoriaProducto.HARDWARE, proveedor1);
-//        Producto producto2 = new Producto(2,"Impresora",170.50,CategoriaProducto.HARDWARE,proveedor2);
-//        Producto producto3 = new Producto(102,"Escoba",4,CategoriaProducto.LIMPIEZA,proveedor3);
-//
-//        // Agregar PRODUCTOS a PROVEEDORES
-//        proveedor1.agregarProducto(producto1);
-//        proveedor2.agregarProducto(producto2);
-//        proveedor3.agregarProducto(producto3);
-//    }
 }
