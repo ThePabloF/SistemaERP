@@ -4,6 +4,7 @@ package clases.visual;
 import clases.SistemaDeCompras;
 import clases.enums.CategoriaProducto;
 import clases.productos.Producto;
+import clases.productos.ProductoIva;
 import clases.productos.ProductoNoIva;
 import clases.visual.Proveedor;
 
@@ -15,6 +16,9 @@ public class MenuProductos extends Frame {
     private SistemaDeCompras sistema;
     private TextArea areaProductos;
     private int idProductos = 103;
+    private Checkbox conIVA;
+    private Checkbox sinIVA;
+    private CheckboxGroup grupoIVA;
 
     public MenuProductos(SistemaDeCompras sistema) {
         this.sistema = sistema;
@@ -26,7 +30,7 @@ public class MenuProductos extends Frame {
 
     private void setupUI() {
         // Panel de formulario
-        Panel panelForm = new Panel(new GridLayout(6, 2, 5, 5)); // Se aumentó la fila
+        Panel panelForm = new Panel(new GridLayout(8, 2, 5, 5)); // Se aumentó la fila
         panelForm.setBackground(new Color(169, 176, 185));
 
         // Campos del formulario
@@ -36,6 +40,15 @@ public class MenuProductos extends Frame {
         TextField precio = new TextField(10);
         Label lblCategoria = new Label("Categoría:");
         Choice comboCat = new Choice();
+        grupoIVA = new CheckboxGroup();
+        conIVA = new Checkbox("Con IVA", grupoIVA, true);  // Por defecto
+        sinIVA = new Checkbox("Sin IVA", grupoIVA, false);
+
+        panelForm.add(new Label("IVA:"));
+        Panel panelIVA = new Panel(new FlowLayout(FlowLayout.LEFT));
+        panelIVA.add(conIVA);
+        panelIVA.add(sinIVA);
+        panelForm.add(panelIVA);
         for (CategoriaProducto cat : CategoriaProducto.values()) {
             comboCat.add(cat.name());
         }
@@ -45,6 +58,7 @@ public class MenuProductos extends Frame {
         for (Proveedor p : proveedores) {
             comboProv.add(p.getNombre());
         }
+
 
         // Nuevo campo de búsqueda
         Label lblBuscar = new Label("Buscar por ID:");
@@ -103,10 +117,35 @@ public class MenuProductos extends Frame {
                 CategoriaProducto cat = CategoriaProducto.valueOf(comboCat.getSelectedItem());
                 Proveedor prov = proveedores.get(comboProv.getSelectedIndex());
 
-                Producto producto = new ProductoNoIva(idProductos++, nom, prec, cat, prov);
+                // Validación primitiva para evitar duplicados
+                for (Producto p : sistema.getListaProductos()) {
+                    if (p.getNombreProducto().equalsIgnoreCase(nom) &&
+                            p.getPrecioUnitario() == prec &&
+                            p.getProveedor().getNombre().equalsIgnoreCase(prov.getNombre())) {
+
+                        areaProductos.setText("Error: Ya existe un producto con el mismo nombre, precio y proveedor.\n" +
+                                "Por favor cambia alguno de esos campos.");
+                        return; // No continúa si encuentra duplicado
+                    }
+                }
+
+                // Crear el producto según el checkbox
+                Producto producto;
+                if (conIVA.getState()) {
+                    producto = new ProductoIva(idProductos++, nom, prec, cat, prov);
+                } else {
+                    producto = new ProductoNoIva(idProductos++, nom, prec, cat, prov);
+                }
+
+                // Agregar el producto al sistema
                 sistema.getListaProductos().add(producto);
                 prov.agregarProducto(producto);
                 actualizarListaProductos();
+
+                // Limpiar campos después de guardar
+                nombre.setText("");
+                precio.setText("");
+
             } catch (NumberFormatException ex) {
                 areaProductos.setText("Error: Precio debe ser un número válido.");
             }
